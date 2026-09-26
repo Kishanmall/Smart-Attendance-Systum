@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#155eef" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <title>Smart Attendance | CSC AI-ML</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <section class="login-screen" id="login-screen" aria-label="Login page">
+    <div class="login-shade"></div>
+    <div class="login-content">
+      <div class="college-intro">
+        <div class="college-badge">MIPS</div>
+        <p class="login-eyebrow">WELCOME TO</p>
+        <h1>Maharana Institute of<br>Professional Studies</h1>
+        <p class="kanpur">KANPUR, UTTAR PRADESH</p>
+        <div class="intro-line"></div>
+        <p class="intro-copy">Smart Attendance Management System<br><span>B.Tech CSC (Artificial Intelligence & Machine Learning)</span></p>
+      </div>
+      <form class="login-card" id="login-form">
+        <div class="login-icon">✓</div>
+        <h2>Sign in to continue</h2>
+        <p>Access the attendance dashboard</p>
+        <label>Faculty / Admin ID<input id="login-id" required autocomplete="username" placeholder="Enter your ID" /></label>
+        <label>Password<input id="login-password" type="password" required autocomplete="current-password" placeholder="Enter password" /></label>
+        <button class="primary-btn login-btn" type="submit">Login to Dashboard <span>→</span></button>
+        <small>Mini Project • Roll Number Wise Attendance</small>
+      </form>
+    </div>
+  </section>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark">✓</span><div><strong>Smart Attendance</strong><small>CSC • AI-ML</small></div></div>
+      <nav aria-label="Main navigation">
+        <button class="nav-link active" data-page="attendance"><span>▦</span> Attendance</button>
+        <button class="nav-link" data-page="students"><span>♙</span> Students</button>
+        <button class="nav-link" data-page="reports"><span>▤</span> Reports</button>
+      </nav>
+      <div class="side-note"><b>Mini Project</b><br>Roll-number-wise attendance<br><span>Data is saved in this browser.</span></div>
+    </aside>
+
+    <main>
+      <header>
+        <div><p class="eyebrow">B.TECH CSC (AI-ML)</p><h1 id="page-title">Today's Attendance</h1></div>
+        <div class="header-actions"><div class="date-display" id="header-date"></div><button class="logout-btn" id="logout-button">Logout</button></div>
+      </header>
+
+      <section class="page active" id="attendance-page">
+        <div class="toolbar card">
+          <label>Date <input type="date" id="attendance-date"></label>
+          <label class="search-label">Search student <input type="search" id="student-search" placeholder="Roll No. or name" /></label>
+          <button class="outline-btn" id="mark-all-present">Mark All Present</button>
+          <button class="primary-btn" id="download-day">↓ Download CSV</button>
+        </div>
+        <div class="stat-grid">
+          <article class="stat-card total"><span>Total Students</span><strong id="total-count">0</strong></article>
+          <article class="stat-card present"><span>Present</span><strong id="present-count">0</strong></article>
+          <article class="stat-card absent"><span>Absent</span><strong id="absent-count">0</strong></article>
+          <article class="stat-card pending"><span>Not Marked</span><strong id="pending-count">0</strong></article>
+        </div>
+        <div class="card table-card">
+          <div class="table-heading"><div><h2>Roll-Number-Wise Register</h2><p>Select Present or Absent for each student.</p></div><span class="saved" id="save-status">● Auto-saved</span></div>
+          <div class="table-wrap"><table>
+            <thead><tr><th>#</th><th>Roll No.</th><th>Name</th><th>Section</th><th>Status</th></tr></thead>
+            <tbody id="attendance-body"></tbody>
+          </table></div>
+          <div class="empty-state" id="attendance-empty" hidden><span>◌</span><h3>No students yet</h3><p>Add the roll numbers in the Students section first.</p><button class="primary-btn go-students">Add Students</button></div>
+        </div>
+      </section>
+
+      <section class="page" id="students-page">
+        <div class="split-layout">
+          <form class="card form-card" id="add-student-form">
+            <p class="eyebrow">NEW STUDENT</p><h2>Add Student</h2><p class="muted">Keep the roll number unique, for example 2503491530001.</p>
+            <label>Roll Number<input id="roll-number" required maxlength="30" placeholder="2503491530001" /></label>
+            <label>Full Name<input id="student-name" required maxlength="60" placeholder="Enter full name" /></label>
+            <label>Section<input id="section" maxlength="20" value="AI-ML A" placeholder="AI-ML A" /></label>
+            <button class="primary-btn wide" type="submit">+ Add Student</button>
+          </form>
+          <div class="card import-card"><p class="eyebrow">BULK IMPORT</p><h2>Add from CSV</h2><p class="muted">The first row can be a header: <code>Roll No, Name, Section</code></p>
+            <label class="file-label"><input type="file" id="csv-file" accept=".csv,text/csv" />Choose CSV File</label>
+            <button class="outline-btn wide" id="load-sample">Load MIPS Batch (65 Students)</button>
+            <p class="file-message" id="import-message"></p>
+          </div>
+        </div>
+        <div class="card table-card">
+          <div class="table-heading"><div><h2>Student List</h2><p id="student-list-caption">0 registered students</p></div><button class="danger-text" id="clear-all">Clear All Students</button></div>
+          <div class="table-wrap"><table><thead><tr><th>#</th><th>Roll No.</th><th>Name</th><th>Section</th><th></th></tr></thead><tbody id="students-body"></tbody></table></div>
+          <div class="empty-state" id="students-empty"><span>♙</span><h3>The student list is empty</h3><p>Fill in the form above or load the MIPS batch.</p></div>
+        </div>
+      </section>
+
+      <section class="page" id="reports-page">
+        <div class="card report-controls"><div><p class="eyebrow">ANALYTICS</p><h2>Roll-Number-Wise Report</h2></div>
+          <label>From <input type="date" id="from-date"></label><label>To <input type="date" id="to-date"></label>
+          <button class="primary-btn" id="make-report">Generate Report</button><button class="outline-btn" id="download-report">↓ Download CSV</button>
+        </div>
+        <div class="report-summary" id="report-summary"></div>
+        <div class="card table-card"><div class="table-heading"><div><h2>Attendance Percentage</h2><p>Only dates with marked attendance are counted.</p></div></div>
+          <div class="table-wrap"><table><thead><tr><th>Roll No.</th><th>Name</th><th>Present Days</th><th>Absent Days</th><th>Marked Days</th><th>Percentage</th></tr></thead><tbody id="report-body"></tbody></table></div>
+          <div class="empty-state" id="report-empty"><span>▤</span><h3>No report data found</h3><p>Change the date range or mark attendance first.</p></div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>
