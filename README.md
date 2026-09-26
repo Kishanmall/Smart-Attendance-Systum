@@ -17,8 +17,8 @@ An offline, roll-number-wise attendance mini project for Maharana Institute of P
 
 ```csv
 Roll No,Name,Section
-2503491530061,Kishan Mall,AI-ML B2
-2503491530107, Sunny Yadav,AI-ML B2
+25034915300**,Kishan Mall,AI-ML B2
+25034915301**, Sunny Yadav,AI-ML B2
 ```
 
 > Clearing browser data can remove saved attendance. Download the CSV report before a submission or demo.
