@@ -17,14 +17,8 @@ An offline, roll-number-wise attendance mini project for Maharana Institute of P
 
 ```csv
 Roll No,Name,Section
-23CS001,Aarav Sharma,AI-ML A
-23CS002,Ananya Singh,AI-ML A
+2503491530061,Kishan Mall,AI-ML B2
+2503491530107, Sunny Yadav,AI-ML B2
 ```
 
 > Clearing browser data can remove saved attendance. Download the CSV report before a submission or demo.
-
-## Use on a mobile phone
-
-The app already adapts to mobile screens. Copy the complete project folder to a phone and open `index.html` in a browser for basic offline use.
-
-For the best experience, upload the folder to any static HTTPS host (for example, GitHub Pages or Netlify). Open the generated website URL in Chrome on Android, then use the browser menu and select **Install app** or **Add to Home screen**. The installed app works offline after its first successful load.
